@@ -4,7 +4,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/EOEboh/project-01-chat/handlers"
+	"github.com/EOEboh/mb-project-01-chat/handlers"
 )
 
 func main() {
