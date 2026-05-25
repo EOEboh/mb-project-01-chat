@@ -4,7 +4,7 @@
 
 Stream real-time LLM responses to a browser using Go, Ollama, and Server-Sent Events.
 
-This is the "Hello World" of AI backends — every concept introduced here appears
+This is the "Hello World" of AI backends; every concept introduced here appears
 in every project that follows.
 
 ---
@@ -117,15 +117,15 @@ The browser unwraps it with `JSON.parse(payload)`.
 ## Off-Day Extension (Async Task)
 
 Pick one:
-1. **Add conversation history** — store previous turns and include them in every Ollama request so the AI remembers context
-2. **Add a system prompt editor** — let the user change the AI's persona via a settings panel
-3. **Add a model switcher** — a dropdown that switches between `llama3.2:3b` and `phi3:mini`
+1. **Add conversation history**: store previous turns and include them in every Ollama request so the AI remembers context
+2. **Add a system prompt editor**: let the user change the AI's persona via a settings panel
+3. **Add a model switcher**: a dropdown that switches between `llama3.2:3b` and `phi3:mini`
 
-These patterns appear in Projects 5, 7, and 10 — building them now gives you a head start.
+These patterns appear in Projects 5, 7, and 10 - building them now gives you a head start.
 
 ---
 
 ## What's Next
 
-→ **Project 02: Code Snippet Explainer** — same SSE pattern, but we introduce
+→ **Project 02: Code Snippet Explainer**: same SSE pattern, but we introduce
   code-specific models, system prompt engineering, and output parsing.
