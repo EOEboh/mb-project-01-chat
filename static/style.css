@@ -1,0 +1,30 @@
+/* - Design tokens ─────────────────────────────────────────────────────────
+   Inherited from the bootcamp scaffold.
+   All project-specific styles are in templates/index.html <style> block
+   to keep them co-located with the markup they affect.
+   ───────────────────────────────────────────────────────────────────────── */
+:root {
+    --bg:         #0f1117;
+    --surface:    #1a1d27;
+    --border:     #2a2d3a;
+    --accent:     #00d4aa;
+    --accent-dim: #00d4aa22;
+    --text:       #e2e8f0;
+    --text-muted: #64748b;
+    --font-sans:  'DM Sans', system-ui, sans-serif;
+    --font-mono:  'JetBrains Mono', 'Fira Code', monospace;
+    --radius:     8px;
+    --shadow:     0 4px 24px rgba(0,0,0,0.4);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+    height: 100%;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
