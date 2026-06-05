@@ -16,7 +16,7 @@ func main() {
 	// Project 1 routes
 	// GET  /     : serve the chat page
 	// POST /chat : receive a message, stream the AI response back via SSE
-	mux.HandleFunc("GET /", handlers.Index)
+	mux.HandleFunc("/", handlers.Index)
 	mux.HandleFunc("POST /chat", handlers.Chat)
 
 	log.Println("🚀 AI Chat running → http://localhost:8080")
