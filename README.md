@@ -22,53 +22,49 @@ A single-page chat application where:
 ## Prerequisites
 
 - [Go 1.22+](https://go.dev/dl/)
-- [Ollama](https://ollama.com) installed and running
-
-```bash
-# Install the model (one-time, ~2GB download)
-ollama pull llama3.2:3b
-
-# Verify Ollama is running
-ollama serve
-```
+- [Ollama](https://ollama.com) installed and running (the Mac app auto-starts; run `ollama serve` only if using the CLI)
 
 ---
 
 ## Run It
 
 ```bash
-git clone https://github.com/YOUR_GITHUB_USERNAME/project-01-chat
-cd project-01-chat
-go run main.go
-# => http://localhost:8080
+# 1. Clone the repo
+git clone https://github.com/EOEboh/mb-project-01-chat
+cd mb-project-01-chat
+
+# 2. Pull all Ollama models used in the bootcamp (first time only — ~6 GB)
+make setup
+
+# 3. Start the server
+make run
+# → http://localhost:8080
 ```
 
 ---
 
 ## Architecture
 
-```
 Browser                    Go Server                    Ollama
-  │                            │                            │
-  │  POST /chat                │                            │
-  │  body: message=Hello       │                            │
-  ├──────────────────────────► │                            │
-  │                            │  POST /api/chat            │
-  │                            │  stream: true              │
-  │                            ├──────────────────────────► │
-  │                            │                            │
-  │  HTTP 200                  │  {"message":{"content":"H"}│
-  │  Content-Type:             │ ◄──────────────────────────┤
-  │    text/event-stream       │  {"message":{"content":"i"}│
-  │ ◄──────────────────────────┤ ◄──────────────────────────┤
-  │                            │  {"done": true}            │
-  │  data: "H"\n\n             │ ◄──────────────────────────┤
-  │ ◄──────────────────────────┤                            │
-  │  data: "i"\n\n             │                            │
-  │ ◄──────────────────────────┤                            │
-  │  data: "[DONE]"\n\n        │                            │
-  │ ◄──────────────────────────┤                            │
-```
+│                            │                            │
+│  POST /chat                │                            │
+│  body: message=Hello       │                            │
+├──────────────────────────► │                            │
+│                            │  POST /api/chat            │
+│                            │  stream: true              │
+│                            ├──────────────────────────► │
+│                            │                            │
+│  HTTP 200                  │  {"message":{"content":"H"}│
+│  Content-Type:             │ ◄──────────────────────────┤
+│    text/event-stream       │  {"message":{"content":"i"}│
+│ ◄──────────────────────────┤ ◄──────────────────────────┤
+│                            │  {"done": true}            │
+│  data: "H"\n\n             │ ◄──────────────────────────┤
+│ ◄──────────────────────────┤                            │
+│  data: "i"\n\n             │                            │
+│ ◄──────────────────────────┤                            │
+│  data: "[DONE]"\n\n        │                            │
+│ ◄──────────────────────────┤                            │
 
 ---
 
@@ -93,11 +89,9 @@ w.Header().Set("Cache-Control", "no-cache")
 w.Header().Set("Connection", "keep-alive")
 ```
 Each event is a line starting with `data:` followed by two newlines:
-```
 data: "Hello"\n\n
 data: " world"\n\n
 data: "[DONE]"\n\n
-```
 
 ### Why We JSON-Encode Each Chunk
 Ollama responses can contain `\n`, `"`, and other characters that would break raw SSE.
@@ -117,15 +111,15 @@ The browser unwraps it with `JSON.parse(payload)`.
 ## Off-Day Extension (Async Task)
 
 Pick one:
-1. **Add conversation history**: store previous turns and include them in every Ollama request so the AI remembers context
-2. **Add a system prompt editor**: let the user change the AI's persona via a settings panel
-3. **Add a model switcher**: a dropdown that switches between `llama3.2:3b` and `phi3:mini`
+1. **Add conversation history** — store previous turns and include them in every Ollama request so the AI remembers context
+2. **Add a system prompt editor** — let the user change the AI's persona via a settings panel
+3. **Add a model switcher** — a dropdown that switches between `llama3.2:3b` and `phi3:mini`
 
-These patterns appear in Projects 5, 7, and 10 - building them now gives you a head start.
+These patterns appear in Projects 5, 7, and 10 — building them now gives you a head start.
 
 ---
 
 ## What's Next
 
-→ **Project 02: Code Snippet Explainer**: same SSE pattern, but we introduce
+→ **Project 02: Code Snippet Explainer** — same SSE pattern, but we introduce
   code-specific models, system prompt engineering, and output parsing.
